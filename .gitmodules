@@ -1,0 +1,3 @@
+[submodule "dependabot-core"]
+	path = dependabot-core
+	url = git@github.com:tyson-trinh/dependabot-core.git
