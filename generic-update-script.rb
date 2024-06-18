@@ -173,18 +173,6 @@ parser = Dependabot::FileParsers.for_package_manager(package_manager).new(
 )
 
 dependencies = parser.parse
-
-group_enable = ENV['GROUP_ENABLE'] == 'true'
-group = if group_enable
-          Dependabot::DependencyGroup.new(
-            name: 'group',
-            rules: { 'patterns' => ['*'], 'dependency-type' => 'development'},
-            applies_to: 'version-updates'
-          )
-        else
-          nil
-        end
-
 dependencies.select(&:top_level?).each do |dep|
   #########################################
   # Get update details for the dependency #
@@ -193,7 +181,6 @@ dependencies.select(&:top_level?).each do |dep|
     dependency: dep,
     dependency_files: files,
     credentials: credentials,
-    dependency_group: group,
     options: options,
   )
 
